@@ -44,12 +44,12 @@ class VehicleController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const data = request.only['plate', 'model', 'color', 'brand', 'id']
+    const data = request.only['plate', 'model', 'color', 'brand', 'user']
     const user = await User.findBy(data.id)
-    const payload = Vehicle.create({
+    const payload = await Vehicle.create({
       ...data, 
     })
-    response.json(response)
+    response.json(payload)
 
     
   }
