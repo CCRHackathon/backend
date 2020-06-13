@@ -4,16 +4,13 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const User = use('App/Models/User')
-const Vehicle = use('App/Models/Vehicle')
-
 /**
- * Resourceful controller for interacting with vehicles
+ * Resourceful controller for interacting with users
  */
-class VehicleController {
+class UserController {
   /**
-   * Show a list of all vehicles.
-   * GET vehicles
+   * Show a list of all users.
+   * GET users
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -24,8 +21,8 @@ class VehicleController {
   }
 
   /**
-   * Render a form to be used for creating a new vehicle.
-   * GET vehicles/create
+   * Render a form to be used for creating a new user.
+   * GET users/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -36,27 +33,19 @@ class VehicleController {
   }
 
   /**
-   * Create/save a new vehicle.
-   * POST vehicles
+   * Create/save a new user.
+   * POST users
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const data = request.only(['plate', 'model', 'color', 'brand', 'user'])
-    const user = await User.findBy(data.id)
-    const payload = await Vehicle.create({
-      ...data, 
-    })
-    response.json(payload)
-
-    
   }
 
   /**
-   * Display a single vehicle.
-   * GET vehicles/:id
+   * Display a single user.
+   * GET users/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -67,8 +56,8 @@ class VehicleController {
   }
 
   /**
-   * Render a form to update an existing vehicle.
-   * GET vehicles/:id/edit
+   * Render a form to update an existing user.
+   * GET users/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -79,8 +68,8 @@ class VehicleController {
   }
 
   /**
-   * Update vehicle details.
-   * PUT or PATCH vehicles/:id
+   * Update user details.
+   * PUT or PATCH users/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -90,8 +79,8 @@ class VehicleController {
   }
 
   /**
-   * Delete a vehicle with id.
-   * DELETE vehicles/:id
+   * Delete a user with id.
+   * DELETE users/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -101,4 +90,4 @@ class VehicleController {
   }
 }
 
-module.exports = VehicleController
+module.exports = UserController

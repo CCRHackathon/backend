@@ -8,7 +8,7 @@ class VehiclesSchema extends Schema {
     this.create('vehicles', (table) => {
       table.increments()
       table
-      .integer('user')
+      .integer('user_id')
       .unsigned()
       .references('id')
       .inTable('users')

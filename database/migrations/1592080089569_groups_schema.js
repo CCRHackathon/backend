@@ -3,23 +3,22 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class PlaceSchema extends Schema {
+class GroupsSchema extends Schema {
   up () {
-    this.create('places', (table) => {
+    this.create('groups', (table) => {
       table.increments()
-      table.string('username', 80).notNullable().unique()
+      table.string('name', 80).notNullable()
       table.decimal('lat', 8, 3).notNullable()
       table.decimal('long', 8, 3).notNullable()
-      table.string('name', 60).notNullable()
+      table.string('radio_frequency', 30).notNullable()
       table.string('description', 500)
-      table.integer('category_id').unsigned().references('id').inTable('categories')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('places')
+    this.drop('groups')
   }
 }
 
-module.exports = PlaceSchema
+module.exports = GroupsSchema
