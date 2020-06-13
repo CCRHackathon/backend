@@ -8,6 +8,8 @@ const { default: Axios } = require('axios')
 /** @type {import('@adonisjs/framework/src/Env')} */
 const Env = use('Env')
 
+const Place = use('App/Models/Place')
+
 const apiurl = Env.get('PHP_MS')
 const axios = require('axios')
 
@@ -55,7 +57,12 @@ class PlaceController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) { 
-      
+    const data = request.only(['username', 'lat', 'long', 'name', 'description', /* 'category_id' */])
+    console.log(data)
+    const payload = await Place.create({
+      ...data, 
+    })
+    response.json(payload)
   }
 
   /**

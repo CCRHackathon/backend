@@ -43,7 +43,7 @@ class RatingController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const data = request.only(['user_id', 'place_id', 'stars', 'description'])
+    const data = request.only(['user_id', 'place_id', 'stars', 'comment'])
     console.log(data)
     const payload = await Rating.create({
       ...data, 
