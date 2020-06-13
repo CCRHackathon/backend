@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const Rating = use('App/Models/Rating')
+
 /**
  * Resourceful controller for interacting with ratings
  */
@@ -41,6 +43,12 @@ class RatingController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only(['user_id', 'place_id', 'stars', 'description'])
+    console.log(data)
+    const payload = await Rating.create({
+      ...data, 
+    })
+    response.json(payload)
   }
 
   /**
@@ -53,6 +61,22 @@ class RatingController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+  }
+
+  /**
+   * Display a single rating.
+   * GET ratings/place/:placeId
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
+  async showByPlace ({ params, request, response, view }) {
+    const payload = await Rating.query()
+                            .where('place_id', params.placeId)
+                            .fetch()
+    response.json(payload)
   }
 
   /**

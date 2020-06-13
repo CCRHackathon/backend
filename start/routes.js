@@ -19,3 +19,7 @@ const Route = use('Route')
 Route.on('/').render('welcome')
 
 Route.post('/api/place', 'PlaceController.index')
+
+Route.post('/api/ratings', 'RatingController.store')
+
+Route.get('/api/ratings/place/:placeId', 'RatingController.showByPlace')
