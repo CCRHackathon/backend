@@ -78,6 +78,22 @@ class PlaceController {
   }
 
   /**
+   * Display a single vehicle.
+   * GET places/category/:categoryId
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
+  async showByCategory ({ params, request, response, view }) {
+    const payload = await Place.query()
+                            .where('category_id', params.categoryId)
+                            .fetch()
+    response.json(payload)
+  }
+
+  /**
    * Render a form to update an existing vehicle.
    * GET places/:id/edit
    *

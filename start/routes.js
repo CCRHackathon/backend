@@ -21,6 +21,8 @@ Route.on('/').render('welcome')
 /* Locais */
 Route.get('/api/place', 'PlaceController.index')
 
+Route.get('/api/place/category/:categoryId', 'PlaceController.showByCategory')
+
 Route.post('/api/place', 'PlaceController.store')
 
 /* Avaliações */
