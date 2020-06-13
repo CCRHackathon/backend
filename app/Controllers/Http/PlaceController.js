@@ -25,9 +25,12 @@ class PlaceController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-      const position = request.only(['lat', 'long'])
-      const result = await axios.post(`${apiurl}/api/places`, position)
-      return response.json(position)
+      const position = request.only(['latitude', 'longitude', 'limite_km'])
+      console.log(position)
+      await axios.get(`${apiurl}/?limite_km=${position.limite_km}&latitude=${position.latitude}&longitude=${position.longitude}`, position)
+      .then(async e => {
+          return response.json(e.data)
+      })
 
   }
 

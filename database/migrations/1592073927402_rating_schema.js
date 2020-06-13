@@ -7,7 +7,7 @@ class RatingSchema extends Schema {
   up () {
     this.create('ratings', (table) => {
       table.increments()
-      table.integr('stars').notNullable()
+      table.integer('stars').notNullable()
       table.string('comment', 500).notNullable()
       table.timestamps()
     })
