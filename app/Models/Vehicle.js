@@ -4,6 +4,10 @@
 const Model = use('Model')
 
 class Vehicle extends Model {
+
+    User () {
+        return this.belongsTo('App/Models/User')
+    }
 }
 
 module.exports = Vehicle

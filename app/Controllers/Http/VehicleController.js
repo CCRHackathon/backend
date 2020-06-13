@@ -4,6 +4,9 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const User = use('App/Models/User')
+const Vehicle = use('App/Models/Vehicle')
+
 /**
  * Resourceful controller for interacting with vehicles
  */
@@ -41,6 +44,14 @@ class VehicleController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only['plate', 'model', 'color', 'brand', 'id']
+    const user = await User.findBy(data.id)
+    const payload = Vehicle.create({
+      ...data, 
+    })
+    response.json(response)
+
+    
   }
 
   /**
