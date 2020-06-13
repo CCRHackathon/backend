@@ -23,3 +23,5 @@ Route.post('/api/place', 'PlaceController.index')
 Route.post('/api/ratings', 'RatingController.store')
 
 Route.get('/api/ratings/place/:placeId', 'RatingController.showByPlace')
+
+Route.post('/api/transmission', 'TransmissionController.store')

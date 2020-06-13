@@ -54,15 +54,8 @@ class PlaceController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
-    const data = request.only['plate', 'model', 'color', 'brand', 'user']
-    const user = await User.findBy(data.id)
-    const payload = await Vehicle.create({
-      ...data, 
-    })
-    response.json(payload)
-
-    
+  async store ({ request, response }) { 
+      
   }
 
   /**
