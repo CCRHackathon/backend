@@ -9,7 +9,7 @@ class RatingSchema extends Schema {
       table.increments()
       table.integer('user_id').unsigned().references('id').inTable('users')
       table.integer('place_id').unsigned().references('id').inTable('places')
-      table.integr('stars').notNullable()
+      table.integer('stars').notNullable()
       table.string('comment', 500).notNullable()
       table.timestamps()
     })
