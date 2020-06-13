@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const Category = use('App/Models/Category')
+
 /**
  * Resourceful controller for interacting with categories
  */
@@ -41,6 +43,12 @@ class CategoryController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only(['title', 'description'])
+    console.log(data)
+    const payload = await Category.create({
+      ...data, 
+    })
+    response.json(payload)
   }
 
   /**

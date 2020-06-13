@@ -18,12 +18,18 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
+/* Locais */
 Route.get('/api/place', 'PlaceController.index')
 
 Route.post('/api/place', 'PlaceController.store')
 
+/* Avaliações */
 Route.post('/api/ratings', 'RatingController.store')
 
 Route.get('/api/ratings/place/:placeId', 'RatingController.showByPlace')
 
+/* Transmissões */
 Route.post('/api/transmission', 'TransmissionController.store')
+
+/* Categorias */
+Route.post('/api/category', 'CategoryController.store')

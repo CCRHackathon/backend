@@ -57,7 +57,7 @@ class PlaceController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) { 
-    const data = request.only(['username', 'lat', 'long', 'name', 'description', /* 'category_id' */])
+    const data = request.only(['username', 'lat', 'long', 'name', 'description', 'category_id'])
     console.log(data)
     const payload = await Place.create({
       ...data, 
