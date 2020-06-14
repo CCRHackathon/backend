@@ -43,7 +43,7 @@ class RatingController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const data = request.only(['user_id', 'place_id', 'stars', 'comment'])
+    const data = request.only(['user_id', 'service_id', 'stars', 'comment'])
     console.log(data)
     const payload = await Rating.create({
       ...data, 
@@ -73,10 +73,37 @@ class RatingController {
    * @param {View} ctx.view
    */
   async showByPlace ({ params, request, response, view }) {
+    const Database = use('Database')
+    const payload = await Database.raw(`
+        select avg(r.stars) 
+        from ratings r
+        left join services s on r.service_id = s.id
+        where s.place_id = ${params.placeId}`)
+
+    console.log(payload.rows)
+    //[ { avg: '5.0000000000000000' } ]
+
+    response.json(payload.rows && payload.rows.length > 0 ? payload.rows[0].avg : null)
+  }
+  
+  async showByService ({ params, request, response, view }) {
     const payload = await Rating.query()
-                            .where('place_id', params.placeId)
+                            .where('service_id', params.serviceId)
                             .fetch()
     response.json(payload)
+  }
+
+  async showAvgByService ({ params, request, response, view }) {
+    const Database = use('Database')
+    const payload = await Database.raw(`
+        select avg(r.stars) 
+        from ratings r
+        where r.service_id = ${params.serviceId}`)
+
+    console.log(payload.rows)
+    //[ { avg: '5.0000000000000000' } ]
+
+    response.json(payload.rows && payload.rows.length > 0 ? payload.rows[0].avg : null)
   }
 
   /**

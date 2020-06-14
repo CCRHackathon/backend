@@ -40,6 +40,10 @@ Route.post('/api/ratings', 'RatingController.store')
 
 Route.get('/api/ratings/place/:placeId', 'RatingController.showByPlace')
 
+Route.get('/api/ratings/service/:serviceId', 'RatingController.showByService')
+
+Route.get('/api/ratings/service/:serviceId/avg', 'RatingController.showAvgByService')
+
 /* Transmissões */
 Route.post('/api/transmission', 'TransmissionController.store')
 
