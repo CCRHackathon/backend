@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const User = use('App/Models/User')
+
 /**
  * Resourceful controller for interacting with users
  */
@@ -41,6 +43,12 @@ class UserController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only(['username', 'age', 'state'])
+    console.log(data)
+    const payload = await User.create({
+      ...data, 
+    })
+    response.json(payload)
   }
 
   /**
@@ -53,6 +61,11 @@ class UserController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const rawPayload = await User.query()
+                            .where('id', params.userId)
+                            .fetch()
+    const payload = rawPayload.toJSON()
+    response.json(payload.length > 0 ? payload[0] : payload)
   }
 
   /**

@@ -18,6 +18,11 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
+/* Usuarios */
+Route.post('/api/user', 'UserController.store')
+
+Route.get('/api/user/:userId', 'UserController.show')
+
 /* Locais */
 Route.get('/api/place', 'PlaceController.index')
 
