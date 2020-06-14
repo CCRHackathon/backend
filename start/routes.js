@@ -38,6 +38,7 @@ Route.get('/api/ratings/place/:placeId', 'RatingController.showByPlace')
 /* Transmissões */
 Route.post('/api/transmission', 'TransmissionController.store')
 
+Route.get('/api/transmission/location/:lat/:lon/:radius', 'TransmissionController.showByLocation')
 
 /* Grupos */
 Route.post('/api/group', 'GroupController.store')

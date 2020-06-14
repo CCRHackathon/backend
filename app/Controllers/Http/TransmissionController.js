@@ -1,10 +1,17 @@
 'use strict'
 
+const { default: Axios } = require('axios')
+
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
+const Env = use('Env')
 
 const Transmission = use('App/Models/Transmission')
+
+const apiurl = Env.get('PHP_MS')
+const axios = require('axios')
+
 /**
  * Resourceful controller for interacting with transmissions
  */
@@ -49,7 +56,7 @@ class TransmissionController {
       longitude: data.long,
       title: data.title,
       messages: data.message
-    })  
+    })
     return response.json(payload)
   }
 
@@ -63,6 +70,20 @@ class TransmissionController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+  }
+
+  async showByLocation ({ params, request, response, view }) {
+    const lat = parseFloat(params.lat)
+    const lon = parseFloat(params.lon)
+    const radius = parseFloat(params.radius)
+    
+    const url = `${apiurl}getTransmissao.php?limite_km=${radius}&latitude=${lat}&longitude=${lon}`;
+    console.log(url);
+
+    await axios.get(url)
+    .then(async e => {
+        return response.json(e.data)
+    })
   }
 
   /**
