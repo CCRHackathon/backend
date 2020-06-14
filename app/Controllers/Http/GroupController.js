@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const Group = use('App/Models/Group')
+
 /**
  * Resourceful controller for interacting with groups
  */
@@ -41,6 +43,12 @@ class GroupController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only(['name', 'lat', 'long', 'radio_frequency', 'description'])
+    console.log(data)
+    const payload = await Group.create({
+      ...data, 
+    })
+    response.json(payload)
   }
 
   /**
@@ -53,6 +61,11 @@ class GroupController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const rawPayload = await Group.query()
+                            .where('id', params.groupId)
+                            .fetch()
+    const payload = rawPayload.toJSON()
+    response.json(payload.length > 0 ? payload[0] : payload)
   }
 
   /**

@@ -33,5 +33,11 @@ Route.get('/api/ratings/place/:placeId', 'RatingController.showByPlace')
 /* Transmissões */
 Route.post('/api/transmission', 'TransmissionController.store')
 
+
+/* Grupos */
+Route.post('/api/group', 'GroupController.store')
+
+Route.get('/api/group/:groupId', 'GroupController.show')
+
 /* Categorias */
 Route.post('/api/category', 'CategoryController.store')
