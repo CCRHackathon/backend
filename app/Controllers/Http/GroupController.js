@@ -68,6 +68,24 @@ class GroupController {
     response.json(payload.length > 0 ? payload[0] : payload)
   }
 
+  // Estimativa da aproximação da equação do círculo 
+  // (xp - a)^2 + (yp - b)^2 <= r^2 , 
+  // para o ponto px, py e o círculo a, b raio r
+  async showByLocation ({ params, request, response, view }) {
+    const Database = use('Database')
+
+    const lat = parseFloat(params.lat)
+    const lon = parseFloat(params.lon)
+    const radius = parseFloat(params.radius)
+
+/*    const payload = await Group.query()
+                            .where(`pow( lat - ${lat} , 2) + pow( long - ${lon} , 2)`, '<=', `pow(${radius}, 2)`)
+                            .fetch() */
+    const payload = await Database.raw('select * from groups where pow( lat - ? , 2) + pow( long - ? , 2) <= pow(?, 2)', [lat, lon, radius])
+                            
+    response.json(payload)
+  }
+
   /**
    * Render a form to update an existing group.
    * GET groups/:id/edit

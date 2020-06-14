@@ -39,5 +39,7 @@ Route.post('/api/group', 'GroupController.store')
 
 Route.get('/api/group/:groupId', 'GroupController.show')
 
+Route.get('/api/group/location/:lat/:lon/:radius', 'GroupController.showByLocation')
+
 /* Categorias */
 Route.post('/api/category', 'CategoryController.store')
