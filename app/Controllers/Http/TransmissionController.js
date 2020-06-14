@@ -70,6 +70,8 @@ class TransmissionController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const payload = await Transmission.all()
+    response.json(payload)
   }
 
   async showByLocation ({ params, request, response, view }) {
