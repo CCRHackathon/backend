@@ -12,8 +12,8 @@ class Place extends Model {
   }
 
 
-  ratings () {
-    return this.hasMany('App/Models/Ratings')
+  services () {
+    return this.hasMany('App/Models/Service')
   }
 }
 

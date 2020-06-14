@@ -30,6 +30,11 @@ Route.get('/api/place/category/:categoryId', 'PlaceController.showByCategory')
 
 Route.post('/api/place', 'PlaceController.store')
 
+/* Servicos */
+Route.get('/api/service/place/:placeId', 'ServiceController.showByPlace')
+
+Route.post('/api/service', 'ServiceController.store')
+
 /* Avaliações */
 Route.post('/api/ratings', 'RatingController.store')
 
